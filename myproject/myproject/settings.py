@@ -26,11 +26,7 @@ SECRET_KEY = 'django-insecure-4)e857#k9_v0il)^xeknqa(14u!4@gx0g=mj2ew(2vfmfpc)%!
 
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    "second-app-srab.onrender.com"
-]
-
-
+ALLOWED_HOSTS = ["second-app-srab.onrender.com"]
 
 # Application definition
 
