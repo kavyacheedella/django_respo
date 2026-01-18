@@ -1,0 +1,24 @@
+{% load static %}
+{% extends 'base.html' %}
+
+{% block main %}
+
+<div id="googleMap" style="height:300px"></div>
+
+<script>
+function initMap() {
+    const mapDiv = document.getElementById("googleMap");
+    if (!mapDiv) return;
+
+    const location = { lat: 17.3850, lng: 78.4867 };
+
+    new google.maps.Map(mapDiv, {
+        zoom: 15,
+        center: location
+    });
+}
+</script>
+
+<script async
+src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap">
+</script>
