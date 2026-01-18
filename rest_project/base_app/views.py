@@ -3,43 +3,45 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView as AuthLoginView
-from base_app.models import BookTable, AboutUs, Feedback, Category, Items, Cart
+from base_app.models import BookTable, AboutUs, Feedback, Category, Items, Cart,Order
 from django.contrib.auth import logout
 from django.urls import reverse_lazy
 
+
+@login_required(login_url='login')
 def add_to_cart(request):
-    if request.method == 'POST' and request.user.is_authenticated:
+    if request.method == "POST":
         item_id = request.POST.get('item_id')
-        item = get_object_or_404(Items, id=item_id)
-        
-        print(f'Item ID: {item_id}')  # Debug print
-        print(f'Item: {item.Item_name}, Price: {item.Price}')  # Debug print
+        item = Items.objects.get(id=item_id)
 
-        # Retrieve or initialize the cart from the session
-        cart = request.session.get('cart', {})
-        print(f'Cart before update: {cart}')  # Debug print
+        cart_item, created = Cart.objects.get_or_create(
+            user=request.user,
+            item=item
+        )
 
-        # Update the cart
-        if item_id in cart:
-            cart[item_id]['quantity'] += 1
-        else:
-            cart[item_id] = {
-                'name': item.Item_name,
-                'price': item.Price,
-                'quantity': 1
-            }
+        if not created:
+            cart_item.quantity += 1
+            cart_item.save()
 
-        request.session['cart'] = cart
-        print(f'Cart after update: {cart}')  # Debug print
+        return JsonResponse({"message": "Item added to cart"})
 
-        return JsonResponse({'message': 'Item added to cart', 'cart': cart})
-    else:
-        print('Invalid request')  # Debug print
-        return JsonResponse({'error': 'Invalid request'}, status=400)
 
+@login_required(login_url='login')
+def cart_view(request):
+    cart_items = Cart.objects.filter(user=request.user)
+
+    total = 0
+    for c in cart_items:
+        total += c.item.Price * c.quantity
+
+    return render(request, 'cart.html', {
+        'cart_items': cart_items,
+        'total': total
+    })
 
 def get_cart_items(request):
     if request.user.is_authenticated:
@@ -104,6 +106,56 @@ def MenuView(request):
         "list": categories,
         "items": items
     })
+
+
+
+
+def place_order(request):
+    if request.method == "POST":
+
+        cart = request.session.get('cart', {})
+        total = 0
+
+        # ✅ calculate total first
+        for item in cart.values():
+            total += item['price'] * item['quantity']
+
+        # ✅ then clear cart
+        request.session['cart'] = {}
+
+        return render(request, "success.html", {"total": total})
+
+    return redirect('Menu')
+
+
+@login_required(login_url='login')
+def checkout(request):
+    cart_items = Cart.objects.filter(user=request.user)
+
+    total = 0
+    for c in cart_items:
+        total += c.item.Price * c.quantity
+
+    if request.method == "POST":
+        payment_method = request.POST.get("payment")
+
+        Order.objects.create(
+            user=request.user,
+            total_amount=total,
+            payment_method=payment_method
+        )
+
+        cart_items.delete()  # clear cart after order
+
+        return render(request, "success.html", {"total": total})
+
+    return render(request, "checkout.html", {
+        "cart_items": cart_items,
+        "total": total
+    })
+
+def order_success(request):
+    return render(request, 'success.html')
 
 
 def BookTableView(request):

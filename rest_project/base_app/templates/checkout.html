@@ -1,0 +1,52 @@
+<form method="POST" action="{% url 'place_order' %}">
+  {% csrf_token %}
+
+  <h4>Select Payment Method</h4>
+
+  <label class="pay-option">
+    <input type="radio" name="payment_method" value="cod" checked>
+    Cash on Delivery
+  </label>
+
+  <label class="pay-option">
+    <input type="radio" name="payment_method" value="online" id="onlineRadio">
+    Online Payment
+  </label>
+
+  <!-- ✅ Online payment options -->
+  <div id="online-options" style="display:none; margin-top:15px;">
+
+    <label>
+      <input type="radio" name="online_type" value="upi"> UPI
+    </label><br>
+
+    <label>
+      <input type="radio" name="online_type" value="card"> Debit / Credit Card
+    </label><br>
+
+    <label>
+      <input type="radio" name="online_type" value="netbanking"> Net Banking
+    </label>
+
+  </div>
+
+  <br>
+
+  <button type="submit" class="btn btn-success">Place Order</button>
+</form>
+
+<script>
+  const onlineRadio = document.getElementById("onlineRadio");
+  const onlineOptions = document.getElementById("online-options");
+  const radios = document.querySelectorAll("input[name='payment_method']");
+
+  radios.forEach(radio => {
+    radio.addEventListener("change", () => {
+      if (onlineRadio.checked) {
+        onlineOptions.style.display = "block";
+      } else {
+        onlineOptions.style.display = "none";
+      }
+    });
+  });
+</script>

@@ -104,3 +104,18 @@ $(window).on('load', function () {
 
 });
 
+$('.hero-food-carousel').owlCarousel({
+  loop: true,
+  margin: 10,
+  nav: false,
+  autoplay: true,
+  autoplayTimeout: 2500,
+  dots: true,
+  items: 1
+});
+
+function toggleOnline(show){
+  document.getElementById("onlineMethods").style.display = show ? "block" : "none";
+}
+
+

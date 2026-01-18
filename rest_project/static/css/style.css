@@ -71,6 +71,65 @@ h2 {
   text-align: center;
 }
 
+
+/* ================= HERO FIX ================= */
+
+.slider_section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+.slider_section .container {
+  position: relative;
+  z-index: 5;
+}
+
+.hero-left {
+  max-width: 480px;
+  color: #fff;
+}
+
+.hero-left h1 {
+  font-size: 48px;
+  margin-bottom: -120px;
+  margin-left: -120px;
+  margin-top: 180px;
+}
+
+.hero-left p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-left: -120px;
+  margin-bottom: -120px;
+}
+
+.hero-left p {
+  margin-bottom: 35px;
+}
+
+.hero-left a.btn {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+
+/* DARK OVERLAY */
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.35);   /* lighter overlay */
+}
+
+
+.bg-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
 a,
 a:hover,
 a:focus {
@@ -88,6 +147,7 @@ a:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
+
 
 /*header section*/
 .hero_area {
@@ -139,7 +199,9 @@ a:focus {
 }
 
 .header_section {
-  padding: 15px 0;
+  position: relative;
+  z-index: 20;
+  top: 39px;
 }
 
 .header_section .container-fluid {
@@ -162,7 +224,7 @@ a:focus {
 }
 
 .custom_nav-container .navbar-nav {
-  padding-left: 18%;
+  padding-left: 0;
 }
 
 .custom_nav-container .navbar-nav .nav-item .nav-link {
@@ -191,6 +253,17 @@ a:focus {
 .custom_nav-container .nav_search-btn:hover {
   color: #ffbe33;
 }
+
+.slider_section .container {
+  position: relative;
+  z-index: 10;
+}
+
+
+.hero-left {
+  max-width:350px;
+}
+
 
 .user_option {
   display: -webkit-box;
@@ -1005,3 +1078,145 @@ a:focus {
   color: inherit;
 }
 /*# sourceMappingURL=style.css.map */
+
+/* ================= CHECKOUT PAGE ================= */
+
+.checkout-container {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkout-card {
+  background: #fff;
+  padding: 35px 40px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.checkout-title {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.bill-box {
+  background: #ffbe33;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  color: #000;
+}
+
+.bill-box h4 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.bill-box h3 {
+  margin: 5px 0 0;
+  font-weight: bold;
+}
+
+
+
+.payment-options {
+  margin-top: 15px;
+}
+
+.pay-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.pay-option:hover {
+  background: #f8f8f8;
+}
+
+.pay-option input {
+  transform: scale(1.2);
+}
+
+.place-order-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 30px;
+  font-size: 18px;
+}
+
+/* payment boxes */
+.pay-box, .pay-sub{
+  display: block;
+  border: 1px solid #ddd;
+  padding: 12px 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background: #fafafa;
+}
+
+.pay-box:hover, .pay-sub:hover{
+  background: #f1f1f1;
+}
+
+#onlineMethods{
+  margin-top: 10px;
+  padding-left: 15px;
+}
+
+/* ordered places succesfully */
+
+.success-box{
+  max-width: 500px;
+  margin: 80px auto;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.success-box h2{
+  color: #28a745;
+  font-family: 'Dancing Script', cursive;
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.success-box p{
+  font-size: 18px;
+  margin-bottom: 25px;
+}
+
+.order-more-btn{
+  display: inline-block;
+  padding: 12px 35px;
+  background: #ffbe33;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.order-more-btn:hover{
+  background: #e6a800;
+}
+
+
+.pay-option {
+  display: block;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}

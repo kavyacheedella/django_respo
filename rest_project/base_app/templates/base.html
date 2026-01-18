@@ -42,15 +42,17 @@
   <div class="hero_area">
     <div class="bg-box">
       <img src="{% static 'images/hero-bg.jpg' %}" alt="">
+      <div class="hero-overlay"></div>
     </div>
+
 
     <!-- header section strats -->
     <header class="header_section">
-      <div class="container">
+      <div class="container-fluid px-5">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="{% url 'Home' %}">
             <span>
-              Burgger
+              Home Food Restaurant
             </span>
           </a>
 
@@ -115,7 +117,13 @@
             </ul>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="modal-footer d-flex justify-content-between">
+              <a href="{% url 'checkout' %}" class="btn btn-warning">
+                Proceed to Checkout
+              </a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
           </div>
         </div>
       </div>

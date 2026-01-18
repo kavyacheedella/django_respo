@@ -126,4 +126,4 @@ GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR/'media'

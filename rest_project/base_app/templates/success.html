@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<div class="success-container">
+  <div class="success-card">
+    <h1>🎉 Order Placed Successfully</h1>
+    <p>Your payment of <b>₹ {{ total }}</b> is confirmed.</p>
+
+    <a href="{% url 'Home' %}" class="btn btn-warning order-more-btn">
+        Order More
+    </a>
+
+  </div>
+</div>
+
+{% endblock %}
