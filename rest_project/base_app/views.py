@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView as AuthLoginView
-from base_app.models import BookTable, AboutUs, Feedback, ItemList, Items, Cart
+from base_app.models import BookTable, AboutUs, Feedback, Category, Items, Cart
 from django.contrib.auth import logout
 from django.urls import reverse_lazy
 
@@ -86,7 +86,7 @@ def SignupView(request):
 
 def HomeView(request):
     items =  Items.objects.all()
-    list = ItemList.objects.all()
+    list = Category.objects.all()
     review = Feedback.objects.all().order_by('-id')[:5]
     return render(request, 'home.html',{'items': items, 'list': list, 'review': review})
 
@@ -97,9 +97,13 @@ def AboutView(request):
 
 
 def MenuView(request):
-    items =  Items.objects.all()
-    list = ItemList.objects.all()
-    return render(request, 'menu.html', {'items': items, 'list': list})
+    categories = Category.objects.all()
+    items = Items.objects.all()
+
+    return render(request, "menu.html", {
+        "list": categories,
+        "items": items
+    })
 
 
 def BookTableView(request):

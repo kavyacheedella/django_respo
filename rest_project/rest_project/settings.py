@@ -20,6 +20,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
@@ -123,3 +124,6 @@ STATIC_URL = 'static/'
 
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
