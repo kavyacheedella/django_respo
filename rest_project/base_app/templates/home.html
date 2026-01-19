@@ -164,7 +164,11 @@
             <p>Rating: {{ k.Rating }}/5</p>
           </div>
           <div class="img-box">
+            {% if k.Image %}
             <img src="{{ k.Image.url }}" alt="{{ k.User_name }}">
+            {% else %}
+            <img src="{% static 'images/user.png' %}" alt="User">
+            {% endif %}
           </div>
         </div>
       </div>
