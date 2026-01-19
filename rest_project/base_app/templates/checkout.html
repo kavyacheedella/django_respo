@@ -1,39 +1,50 @@
-<form method="POST" action="{% url 'place_order' %}">
-  {% csrf_token %}
+{% extends "base.html" %}
+<!-- {% block class %}class="sub_page"{% endblock class %} -->
 
-  <h4>Select Payment Method</h4>
+{% block main %}
+<div class="checkout-container">
+  <div class="checkout-card">
 
-  <label class="pay-option">
-    <input type="radio" name="payment_method" value="cod" checked>
-    Cash on Delivery
-  </label>
+    <h3 class="checkout-title">Select Payment Method</h3>
 
-  <label class="pay-option">
-    <input type="radio" name="payment_method" value="online" id="onlineRadio">
-    Online Payment
-  </label>
+    <form method="POST" action="{% url 'place_order' %}">
+      {% csrf_token %}
 
-  <!-- ✅ Online payment options -->
-  <div id="online-options" style="display:none; margin-top:15px;">
+      <label class="pay-option">
+        <input type="radio" name="payment_method" value="cod" checked>
+        Cash on Delivery
+      </label>
 
-    <label>
-      <input type="radio" name="online_type" value="upi"> UPI
-    </label><br>
+      <label class="pay-option">
+        <input type="radio" name="payment_method" value="online" id="onlineRadio">
+        Online Payment
+      </label>
 
-    <label>
-      <input type="radio" name="online_type" value="card"> Debit / Credit Card
-    </label><br>
+      <!-- Online options -->
+      <div id="online-options" style="display:none; margin-top:15px;">
 
-    <label>
-      <input type="radio" name="online_type" value="netbanking"> Net Banking
-    </label>
+        <label class="pay-sub">
+          <input type="radio" name="online_type" value="upi"> UPI
+        </label>
+
+        <label class="pay-sub">
+          <input type="radio" name="online_type" value="card"> Debit / Credit Card
+        </label>
+
+        <label class="pay-sub">
+          <input type="radio" name="online_type" value="netbanking"> Net Banking
+        </label>
+
+      </div>
+
+      <button type="submit" class="btn btn-success place-order-btn">
+        Place Order
+      </button>
+
+    </form>
 
   </div>
-
-  <br>
-
-  <button type="submit" class="btn btn-success">Place Order</button>
-</form>
+</div>
 
 <script>
   const onlineRadio = document.getElementById("onlineRadio");
@@ -42,11 +53,8 @@
 
   radios.forEach(radio => {
     radio.addEventListener("change", () => {
-      if (onlineRadio.checked) {
-        onlineOptions.style.display = "block";
-      } else {
-        onlineOptions.style.display = "none";
-      }
+      onlineOptions.style.display = onlineRadio.checked ? "block" : "none";
     });
   });
 </script>
+{% endblock %}
