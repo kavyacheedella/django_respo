@@ -30,7 +30,12 @@
           <div class="box">
             <div>
               <div class="img-box">
+                {% if j.Image %}
                 <img src="{{ j.Image.url }}" alt="{{ j.Item_name }}">
+                {% else %}
+                <img src="{% static 'images/no-image.png' %}" alt="No image">
+                {% endif%}
+
               </div>
               <div class="detail-box">
                 <h5>
